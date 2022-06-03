@@ -1,6 +1,6 @@
-import styled from "@emotion/styled";
 import { useCallback, useEffect, useState } from "react";
 import Milk from "../components/Milk";
+import styles from "./index.module.css";
 
 interface milkProp {
   id: number;
@@ -13,15 +13,14 @@ export default function Home() {
     { id: 2, image: 2 },
   ]);
 
-  const removeChild = useCallback((index: number) => {
-    setMilks((o) => o.filter((el, elI) => elI !== index));
+  const removeChild = useCallback((id: number) => {
+    setMilks((o) => o.filter((el) => el.id !== id));
   }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
       // @ts-ignore
       let randomImage: 1 | 2 | 3 = 1 + Math.floor(Math.random() / 0.3333);
-      console.log(randomImage);
       setMilks((o) => [...o, { id: Math.random(), image: randomImage }]);
     }, 2 * 1000);
     return () => {
@@ -30,53 +29,28 @@ export default function Home() {
   }, []);
 
   return (
-    <Container>
-      <Main>
-        <Left>soy</Left>
-        <Right>usz</Right>
-      </Main>
-      <MilkContainer>
-        {milks.map((milk, milkIndex) => (
-          <Milk key={milk.id} image={milk.image} onRest={() => {}} />
-        ))}
-      </MilkContainer>
-    </Container>
+    <div className={styles.container}>
+      <div className={styles.scrollBox}></div>
+      <div className={styles.section1}>
+        <div className={styles.main}>
+          <div className={styles.left}>
+            <span>soy</span>
+          </div>
+          <div className={styles.right}>
+            <span>usz</span>
+          </div>
+        </div>
+        <div>
+          {milks.map((milk) => (
+            <Milk
+              key={milk.id}
+              image={milk.image}
+              onRest={() => removeChild(milk.id)}
+            />
+          ))}
+        </div>
+      </div>
+      <div className={styles.section2}>ee</div>
+    </div>
   );
 }
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  background-image: url("./background.png");
-  position: relative;
-  overflow: hidden;
-`;
-
-const MilkContainer = styled.div``;
-
-const Main = styled.main`
-  display: flex;
-  flex: 1;
-
-  & > * {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 5rem;
-  }
-`;
-
-const Left = styled.div`
-  background-color: rgba(255, 255, 255, 0.952);
-  color: black;
-  flex: 1;
-  justify-content: flex-end;
-`;
-
-const Right = styled.div`
-  background-color: rgba(0, 0, 0, 0.801);
-  color: white;
-  flex: 1;
-  justify-content: flex-start;
-`;
