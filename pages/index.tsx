@@ -30,7 +30,13 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.scrollBox}></div>
+      <div className={styles.scrollBox}>
+        <img src="/scroll-bar.png" />
+        <span>
+          <span>scroll to </span>
+          <span>see soy</span>
+        </span>
+      </div>
       <div className={styles.section1}>
         <div className={styles.main}>
           <div className={styles.left}>
@@ -50,7 +56,7 @@ export default function Home() {
           ))}
         </div>
       </div>
-      <div className={styles.section2}>ee</div>
+      <div className={styles.section2}>yyyyy</div>
     </div>
   );
 }
