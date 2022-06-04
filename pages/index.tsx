@@ -33,8 +33,8 @@ export default function Home() {
       <div className={styles.scrollBox}>
         <img src="/scroll-bar.png" />
         <span>
-          <span>scroll to </span>
-          <span>soy more</span>
+          <span>{"scroll to "}</span>
+          <span>{" soy more"}</span>
         </span>
       </div>
       <div className={styles.section1}>
